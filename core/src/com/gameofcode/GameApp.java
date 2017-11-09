@@ -27,27 +27,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.gameofcode.exceptions.AnalyzerException;
-import com.gameofcode.lexer.Lexer;
-import com.gameofcode.parser.Parser;
-import com.gameofcode.parser.Rule;
-import com.gameofcode.token.Token;
+import com.gameofcode.compiler.exceptions.AnalyzerException;
+import com.gameofcode.compiler.lexer.Lexer;
+import com.gameofcode.compiler.parser.Parser;
+import com.gameofcode.compiler.parser.Rule;
+import com.gameofcode.compiler.token.Token;
+import com.gameofcode.screens.MainMenuScreen;
 
 
 
 public class GameApp extends Game {
 	
 	public SpriteBatch batch;
-	public BitmapFont font;
 	public Skin skin;
 	public Stage stage;
 
 	@Override
 	public void create() {
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-		stage = new Stage(new StretchViewport(Settings.HEIGHT,Settings.WIDTH));
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
 		
 	}
@@ -60,7 +58,6 @@ public class GameApp extends Game {
 	public void dispose() {
 		batch.dispose();
 		stage.dispose();
-		font.dispose();
 	}
 	
 	

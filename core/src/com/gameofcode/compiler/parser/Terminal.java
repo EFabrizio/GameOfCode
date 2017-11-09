@@ -1,4 +1,4 @@
-package com.gameofcode.parser;
+package com.gameofcode.compiler.parser;
 
 /**
  * The {@code Terminal} class represents a terminal symbol of grammar

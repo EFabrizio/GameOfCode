@@ -1,4 +1,4 @@
-package com.gameofcode.parser;
+package com.gameofcode.compiler.parser;
 
 import java.util.Arrays;
 

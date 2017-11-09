@@ -1,4 +1,4 @@
-package com.gameofcode.parser;
+package com.gameofcode.compiler.parser;
 
 import java.io.File;
 
@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-import com.gameofcode.exceptions.AnalyzerException;
-import com.gameofcode.token.Token;
+import com.gameofcode.compiler.exceptions.AnalyzerException;
+import com.gameofcode.compiler.token.Token;
 
 
 

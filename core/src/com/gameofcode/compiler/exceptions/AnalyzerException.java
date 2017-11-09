@@ -1,4 +1,4 @@
-package com.gameofcode.exceptions;
+package com.gameofcode.compiler.exceptions;
 
 /**
  * The {@code AnalyzerException} class represents exceptions which may be caused

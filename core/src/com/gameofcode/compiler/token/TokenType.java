@@ -1,4 +1,4 @@
-package com.gameofcode.token;
+package com.gameofcode.compiler.token;
 
 /**
  * The {@code TokeType} enumeration represents types of tokens in subset of 

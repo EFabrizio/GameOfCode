@@ -1,4 +1,4 @@
-package com.gameofcode.maps;
+package com.gameofcode.maps.tiles;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;

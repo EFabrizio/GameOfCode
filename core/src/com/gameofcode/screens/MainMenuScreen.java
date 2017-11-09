@@ -1,32 +1,36 @@
-package com.gameofcode;
+package com.gameofcode.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.gameofcode.GameApp;
+import com.gameofcode.Settings;
 
 public class MainMenuScreen implements Screen{
 	
 	private GameApp gameApp;
-
+	private Stage stage;
+	
 	public MainMenuScreen(GameApp gameApp) {
 		this.gameApp = gameApp;
+		stage = new Stage(new StretchViewport(Settings.HEIGHT,Settings.WIDTH));
 		TextButton buttonPlay = new TextButton("Jugar",gameApp.skin);
 		TextButton buttonAbout = new TextButton("Acerca de",gameApp.skin);
 		buttonPlay.setPosition(250, 400);
 		buttonPlay.setSize(100, 100);
 		buttonAbout.setSize(100, 100);
 		buttonAbout.setPosition(250,250);
-		gameApp.stage.addActor(buttonPlay);
-		gameApp.stage.addActor(buttonAbout);
+		stage.addActor(buttonPlay);
+		stage.addActor(buttonAbout);
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -39,8 +43,8 @@ public class MainMenuScreen implements Screen{
 			gameApp.setScreen(new GameScreen(gameApp));
 			dispose();
 		}
-		gameApp.stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		gameApp.stage.draw();
+		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		stage.draw();
 	}
 
 	@Override
@@ -69,8 +73,7 @@ public class MainMenuScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		stage.dispose();
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.gameofcode;
+package com.gameofcode.maps;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.gameofcode.maps.Tile;
+import com.gameofcode.maps.tiles.Tile;
 
 public class LevelMap extends TiledMap {
 	
@@ -32,8 +32,8 @@ public class LevelMap extends TiledMap {
 	private void initLevelMap() {
 		MapLayers layers = this.getLayers();
 		Random random = new Random();
-				for (int x = 0; x < 64; x++) {
-					for (int y = 0; y < 64; y++) {
+				for (int x = 0; x < width; x++) {
+					for (int y = 0; y < height; y++) {
 						Cell cell = new Cell();
 						if(random.nextInt(2) == 1)
 						cell.setTile(Tile.floor);

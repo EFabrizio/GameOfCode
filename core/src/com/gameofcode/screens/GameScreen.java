@@ -1,4 +1,4 @@
-package com.gameofcode;
+package com.gameofcode.screens;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,47 +21,39 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.gameofcode.exceptions.AnalyzerException;
-import com.gameofcode.lexer.Lexer;
-import com.gameofcode.parser.Parser;
-import com.gameofcode.parser.Rule;
-import com.gameofcode.token.Token;
+import com.gameofcode.GameApp;
+import com.gameofcode.Settings;
+import com.gameofcode.World;
+import com.gameofcode.compiler.exceptions.AnalyzerException;
+import com.gameofcode.compiler.lexer.Lexer;
+import com.gameofcode.compiler.parser.Parser;
+import com.gameofcode.compiler.parser.Rule;
+import com.gameofcode.compiler.token.Token;
+import com.gameofcode.entity.FoodEntity;
+import com.gameofcode.entity.Player;
+import com.gameofcode.maps.LevelMap;
 
 public class GameScreen implements Screen {
 	
 	private GameApp gameApp;
-	private SpriteBatch batch;
-	private Texture img;
-	private TextureRegion boxCut;
 	private Stage stage;
 	private Skin skin;
 	private TextArea textAreaCode;
 	private TextButton button;
-	private Player player;
-	private OrthogonalTiledMapRenderer mapRender;
-	private OrthographicCamera camera;
+	private World world;
+
 	
 	public GameScreen(GameApp gameApp){
 		this.gameApp = gameApp;
-		batch = new SpriteBatch();
 		stage = new Stage(new StretchViewport(Settings.HEIGHT,Settings.WIDTH));
-
-
-
-		player = new Player();
-		img = new Texture("boy.png");
-		
-		boxCut = new TextureRegion(img,0,0,42,50);
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-		   
-			textAreaCode = new TextArea("",skin);
-			textAreaCode.setPosition(350,0);
-			textAreaCode.setSize(250, 950);
-			
-			
-		   button = new TextButton("Ejecutar Programa", skin);
-		button.setSize(250, 75);
-		button.setPosition(350, 0);
+		world = new World();
+		textAreaCode = new TextArea("",skin);
+		textAreaCode.setPosition(360,0);
+		textAreaCode.setSize(240, 950);
+		button = new TextButton("Ejecutar Programa", skin);
+		button.setSize(240, 75);
+		button.setPosition(360, 0);
 		button.addListener(new ClickListener() {
 		    @Override
 		    public void clicked(InputEvent event, float x, float y) {
@@ -119,60 +112,38 @@ public class GameScreen implements Screen {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		mapRender.setView(camera);
-		mapRender.render();
-		batch.begin();
-		batch.draw(boxCut, 350, 0);
-		batch.end();
+		gameApp.batch.begin();
+		world.render(gameApp.batch);
+		gameApp.batch.end();
 		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 		stage.draw();
-	
+		world.update(Gdx.graphics.getDeltaTime());
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		gameApp.batch.dispose();
 		stage.dispose();
-		mapRender.dispose();
+		world.dispose();
 	}
 
 	@Override
 	public void show() {
-		mapRender = new OrthogonalTiledMapRenderer(new LevelMap(64,64));
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
-		this.camera = new OrthographicCamera(w, h);
-		this.camera.setToOrtho(false, w, h);
-		camera.position.set(70,300, 0);
-
 		
 	}
 
 
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void resize(int width, int height) {}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void pause() {}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void resume() {}
 
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void hide() {}
 
 	
 

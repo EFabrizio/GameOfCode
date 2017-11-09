@@ -1,4 +1,4 @@
-package com.gameofcode.token;
+package com.gameofcode.compiler.token;
 
 /**
  * The {@code Token} class represents token (lexeme). A token is a string of

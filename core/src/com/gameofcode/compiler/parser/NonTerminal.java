@@ -1,4 +1,4 @@
-package com.gameofcode.parser;
+package com.gameofcode.compiler.parser;
 
 /**
  * The {@code NonTerminal} class represents nonterminal symbol of grammar

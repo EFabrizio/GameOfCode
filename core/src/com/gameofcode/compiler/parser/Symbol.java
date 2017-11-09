@@ -1,4 +1,4 @@
-package com.gameofcode.parser;
+package com.gameofcode.compiler.parser;
 
 public abstract class Symbol {
 	private int code;

@@ -1,4 +1,4 @@
-package com.gameofcode.lexer;
+package com.gameofcode.compiler.lexer;
 
 import java.util.ArrayList;
 
@@ -8,9 +8,9 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gameofcode.exceptions.AnalyzerException;
-import com.gameofcode.token.Token;
-import com.gameofcode.token.TokenType;
+import com.gameofcode.compiler.exceptions.AnalyzerException;
+import com.gameofcode.compiler.token.Token;
+import com.gameofcode.compiler.token.TokenType;
 
 
 
