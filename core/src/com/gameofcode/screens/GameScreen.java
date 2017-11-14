@@ -32,6 +32,8 @@ import com.gameofcode.compiler.token.Token;
 import com.gameofcode.entity.FoodEntity;
 import com.gameofcode.entity.Player;
 import com.gameofcode.maps.LevelMap;
+import com.gameofcode.ui.EnergyBar;
+import com.gameofcode.ui.Inventory;
 
 public class GameScreen implements Screen {
 	
@@ -47,7 +49,7 @@ public class GameScreen implements Screen {
 		this.gameApp = gameApp;
 		stage = new Stage(new StretchViewport(Settings.HEIGHT,Settings.WIDTH));
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-		world = new World();
+		world = new World(gameApp);
 		textAreaCode = new TextArea("",skin);
 		textAreaCode.setPosition(360,0);
 		textAreaCode.setSize(240, 950);
@@ -110,8 +112,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render (float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		world.renderMap();
 		gameApp.batch.begin();
 		world.render(gameApp.batch);
 		gameApp.batch.end();

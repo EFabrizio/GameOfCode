@@ -1,8 +1,13 @@
 package com.gameofcode.screens;
 
 import com.badlogic.gdx.Screen;
+import com.gameofcode.GameApp;
 
 public class AboutScreen implements Screen{
+
+	public AboutScreen(GameApp gameApp) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void show() {

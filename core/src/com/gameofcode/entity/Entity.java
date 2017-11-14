@@ -15,14 +15,19 @@ public abstract class Entity {
 	protected Texture textureImage;
 	protected TextureRegion[] animationFrames;
 	protected Vector2 position;
+	protected Vector2 velocity;
 	protected Texture texture;
-	private TextureRegion textureRegion;
+	protected TextureRegion[] textureRegion;
+	protected final int HEIGHT = 32;
+	protected final int WIDTH = 32;
 	
 	
+	public Entity() {}
 	
 	public Entity(String path) {
 		texture = new Texture(path);
 		position = new Vector2(0,0);
+		velocity = new Vector2();
 		//extureRegion = new TextureRegion(texture,0,0,42,50);
 	}
 	
@@ -47,5 +52,6 @@ public abstract class Entity {
 	
 	public abstract void render(SpriteBatch batch);
 	public abstract void update(float delta);
+	public abstract void dispose();
 
 }

@@ -40,7 +40,6 @@ public class GameApp extends Game {
 	
 	public SpriteBatch batch;
 	public Skin skin;
-	public Stage stage;
 
 	@Override
 	public void create() {
@@ -57,7 +56,6 @@ public class GameApp extends Game {
 	
 	public void dispose() {
 		batch.dispose();
-		stage.dispose();
 	}
 	
 	

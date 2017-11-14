@@ -16,24 +16,35 @@ import com.gameofcode.maps.LevelMap;
 
 public class World {
 	
+	private GameApp gameApp;
 	private Player player;
 	private LevelMap map;
 	private List<Entity> entities;
 	private OrthogonalTiledMapRenderer mapRender;
 	private OrthographicCamera camera;
 	private Random random = new Random();
-	private FoodEntity food = new FoodEntity("entities/pizza.png");
-	
-	public World() {
-		player = new Player("entities/pizza.png");
+	public World(GameApp gameApp) {
+		this.gameApp = gameApp;
+		player = new Player(gameApp,this);
+		player.getInventory().addItem(new FoodEntity("entities/water.png",true));
+		
+		player.getInventory().addItem(new FoodEntity("entities/water.png",true));
+		player.getInventory().addItem(new FoodEntity("entities/water.png",true));
+		player.getInventory().addItem(new FoodEntity("entities/water.png",true));
+		player.getInventory().addItem(new FoodEntity("entities/pizza.png",false));
+		player.getInventory().addItem(new FoodEntity("entities/pizza.png",false));
+		//player.getInventory().eatItem(1);
 		entities = new ArrayList<Entity>();
-		food.setPositionByTile(10, 5);
 		for(int i = 0 ; i < 10;i++) {
+			if(random.nextInt(2) == 1)
 			entities.add(
-					new FoodEntity("entities/pizza.png"));
+					new FoodEntity("entities/pizza.png",false));
+			else
+				entities.add(
+						new FoodEntity("entities/water.png",true));
 			entities.get(i).setPositionByTile(random.nextInt(10),random.nextInt(15));
 		}
-		map = new LevelMap(18,19);
+		map = new LevelMap(18,17);
 		mapRender = new OrthogonalTiledMapRenderer(map);
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -43,42 +54,34 @@ public class World {
 	
 	
 	public void render(SpriteBatch batch) {
-		mapRender.render();
 		for(Entity entity:entities) {
 			entity.render(batch);
 		}
-		food.render(batch);
+		player.render(batch);
+
 	}
 	
 	public void update(float delta) {
 		mapRender.setView(camera);
 		player.update(Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-			camera.position.x-=3;
-			camera.update();
-		}
-		if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-			camera.position.x+=3;
-			camera.update();
-		}
-		if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-			camera.position.y-=3;
-			camera.update();
-		}
-		if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-			camera.position.y+=3;
-			camera.update();
-		}
-		System.out.println(camera.position.x);
-		System.out.println(camera.position.y);
 	}
 
 	public void dispose() {
 		mapRender.dispose();
+		player.dispose();
 	}
 	
 	public Player getPlayer() {
 		return player;
 	}
+
+
+	public void renderMap() {
+		mapRender.render();		
+	}
 	
+	
+	public LevelMap getMap() {
+		return map;
+	}
 }

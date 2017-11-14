@@ -2,19 +2,22 @@ package com.gameofcode.maps;
 
 import java.util.Random;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.gameofcode.maps.tiles.Tile;
 
 public class LevelMap extends TiledMap {
 	
 	private TiledMapTileLayer tileLayer;
 	private int width, height;
-	
+	private Array<Rectangle> collisionTiles = new Array<Rectangle>();
+
 
 	private Texture tileLayerTexture;
 	private int[][] noiseMap;
@@ -35,11 +38,14 @@ public class LevelMap extends TiledMap {
 				for (int x = 0; x < width; x++) {
 					for (int y = 0; y < height; y++) {
 						Cell cell = new Cell();
-						if(random.nextInt(2) == 1)
+						if(random.nextInt(2) == 1) {
 						cell.setTile(Tile.floor);
-						else
+						}else {
 						cell.setTile(Tile.wall);
+						collisionTiles.add(new Rectangle(x*Tile.WIDTH,y*Tile.HEIGHT,Tile.WIDTH,Tile.HEIGHT));
+						}
 						tileLayer.setCell(x, y, cell);
+						
 					}
 				}
 					
@@ -47,5 +53,9 @@ public class LevelMap extends TiledMap {
 		
 			layers.add(this.tileLayer);
 	}
+	
+	public Array<Rectangle> getCollisionTiles() {
+		return collisionTiles;
+	}	
 
 }

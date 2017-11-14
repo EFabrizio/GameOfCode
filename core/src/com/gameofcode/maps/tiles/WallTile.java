@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class WallTile extends Tile {
 
 	public WallTile(int id, int xIndex, int yIndex) {
-		super(id, new TextureRegion(new Texture(Gdx.files.internal("maps/tileset2.png")),192,128,xIndex,yIndex));
+		super(id, new TextureRegion(new Texture(Gdx.files.internal("maps/tileset2.png")),224,128,xIndex,yIndex));
 		
 	}
 
